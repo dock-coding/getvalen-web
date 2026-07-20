@@ -3,124 +3,418 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Valen — an AI strength coach that remembers what you lifted</title>
-<meta name="description" content="Valen is a strength training app with an AI coach that knows your history. Track lifts, build programmes, chase personal bests. Your training data stays on your phone.">
-<meta name="robots" content="index, follow">
-<link rel="icon" href="/assets/favicon.png" type="image/png">
-<meta property="og:title" content="Valen — an AI strength coach that remembers what you lifted">
-<meta property="og:description" content="Track lifts, build programmes, chase personal bests. Your training data stays on your phone.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://getvalen.app">
+<title>Valen — your AI strength coach</title>
+<meta name="description" content="A private AI strength coach that plans your training so you never have to. Your data stays on your phone.">
+
+<!-- ============================================================
+     CONFIG — fill these before publishing:
+     · FORMSPREE_ENDPOINT below (search for it) — your form ID
+     · Tagline in the hero (search HERO_TAGLINE) — still undecided
+     · Comparison pages are stubs: /compare/fitbod etc.
+     ============================================================ -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0F;
+    --bg-raise:#12121A;
+    --card:#14141D;
+    --line:#232331;
+    --line-soft:#1B1B26;
+    --violet:#8B7BF7;
+    --violet-bright:#9E8FFF;
+    --violet-dim:#5B4FD1;
+    --amber:#F5A656;
+    --text:#F4F4F7;
+    --text-mid:#B4B4C2;
+    --muted:#71717F;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.1;letter-spacing:-.02em;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--violet-bright)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,15,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:800;font-size:18px;letter-spacing:.02em}
+  .brand svg{width:30px;height:30px;display:block}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--text-mid);font-weight:500;transition:color .15s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{background:var(--violet);color:#0B0B0F!important;padding:9px 18px;border-radius:9px;font-weight:700;font-size:14px;transition:background .15s}
+  .nav-cta:hover{background:var(--violet-bright)}
+  @media(max-width:720px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:120px 0 100px;text-align:center;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;
+    background:radial-gradient(ellipse,rgba(139,123,247,.18) 0%,rgba(139,123,247,0) 65%);pointer-events:none}
+  .hero-badge{width:96px;height:96px;margin:0 auto 34px;display:block;position:relative;
+    animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .hero h1{font-size:clamp(38px,6.5vw,68px);position:relative;margin-bottom:22px}
+  .hero h1 .accent{color:var(--violet-bright)}
+  .hero-sub{font-size:clamp(17px,2.4vw,21px);color:var(--text-mid);max-width:600px;margin:0 auto 40px;position:relative}
+  .hero-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+  .btn{padding:15px 30px;border-radius:11px;font-weight:700;font-size:16px;font-family:'Inter';cursor:pointer;border:none;transition:transform .12s,background .15s;display:inline-block}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--violet);color:#0B0B0F}
+  .btn-primary:hover{background:var(--violet-bright)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--violet);color:var(--violet-bright)}
+  .hero-note{margin-top:20px;font-size:13px;color:var(--muted);position:relative}
+
+  /* ---------- section frame ---------- */
+  section{padding:88px 0}
+  .section-head{max-width:640px;margin-bottom:52px}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .section-head h2{font-size:clamp(28px,4vw,42px);margin:14px 0 16px}
+  .section-head p{font-size:17px;color:var(--text-mid)}
+
+  /* ---------- the problem strip ---------- */
+  .problem{background:var(--bg-raise);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .problem-quote{max-width:760px;margin:0 auto;text-align:center}
+  .problem-quote p{font-family:'Sora';font-weight:700;font-size:clamp(22px,3.4vw,32px);line-height:1.32;letter-spacing:-.02em}
+  .problem-quote .dim{color:var(--muted)}
+  .problem-quote .foot{font-family:'Inter';font-weight:500;font-size:16px;color:var(--text-mid);margin-top:28px;letter-spacing:0}
+
+  /* ---------- features ---------- */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:860px){.features{grid-template-columns:1fr}}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 26px;transition:border-color .2s,transform .2s}
+  .feat:hover{border-color:var(--violet-dim);transform:translateY(-3px)}
+  .feat-ico{width:44px;height:44px;border-radius:12px;background:rgba(139,123,247,.12);border:1px solid rgba(139,123,247,.28);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .feat-ico svg{width:22px;height:22px;stroke:var(--violet-bright);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .feat h3{font-size:19px;margin-bottom:10px;font-weight:700}
+  .feat p{font-size:15px;color:var(--text-mid)}
+
+  /* ---------- privacy band ---------- */
+  .privacy{background:linear-gradient(180deg,var(--bg) 0%,#0E0C14 100%);border-top:1px solid var(--line-soft)}
+  .privacy-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  @media(max-width:860px){.privacy-grid{grid-template-columns:1fr;gap:32px}}
+  .privacy h2{font-size:clamp(28px,4vw,40px);margin-bottom:18px}
+  .privacy p{color:var(--text-mid);font-size:16px;margin-bottom:16px}
+  .privacy .highlight{color:var(--text);font-weight:600}
+  .boundary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .b-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+  .b-row:last-child{border-bottom:none}
+  .b-row .k{color:var(--text-mid)}
+  .b-tag{font-size:11px;font-weight:700;letter-spacing:.05em;padding:4px 9px;border-radius:6px}
+  .b-stay{background:rgba(139,123,247,.14);color:var(--violet-bright)}
+  .b-go{background:rgba(245,166,86,.13);color:var(--amber)}
+
+  /* ---------- compare stubs ---------- */
+  .compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:720px){.compare-grid{grid-template-columns:1fr}}
+  .cmp{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;transition:border-color .2s,transform .2s}
+  .cmp:hover{border-color:var(--violet-dim);transform:translateY(-2px)}
+  .cmp .vs{font-size:13px;color:var(--muted);font-weight:600}
+  .cmp h3{font-size:20px;margin:6px 0 10px}
+  .cmp .arrow{color:var(--violet-bright);font-size:14px;font-weight:600}
+
+  /* ---------- beta / signup ---------- */
+  .beta{background:var(--bg-raise);border-top:1px solid var(--line-soft)}
+  .beta-card{max-width:600px;margin:0 auto;text-align:center}
+  .beta-card h2{font-size:clamp(28px,4vw,40px);margin-bottom:14px}
+  .beta-card p{color:var(--text-mid);font-size:17px;margin-bottom:32px}
+  .signup{display:flex;gap:10px;max-width:460px;margin:0 auto;flex-wrap:wrap}
+  .signup input{flex:1;min-width:220px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:15px 18px;color:var(--text);font-size:15px;font-family:'Inter'}
+  .signup input:focus{outline:none;border-color:var(--violet)}
+  .signup button{white-space:nowrap}
+  .signup-note{font-size:13px;color:var(--muted);margin-top:16px}
+  .signup-note a{color:var(--text-mid);text-decoration:underline}
+  .form-msg{margin-top:18px;font-size:15px;font-weight:600;min-height:22px}
+  .form-msg.ok{color:var(--violet-bright)}
+  .form-msg.err{color:var(--amber)}
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:760px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--line-soft)}
+  .faq-q{width:100%;background:none;border:none;color:var(--text);font-family:'Sora';font-weight:700;font-size:18px;text-align:left;padding:24px 40px 24px 0;cursor:pointer;position:relative;letter-spacing:-.01em}
+  .faq-q::after{content:'+';position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--violet-bright);font-weight:400;transition:transform .2s}
+  .faq-item.open .faq-q::after{content:'−'}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--text-mid);font-size:15px}
+  .faq-item.open .faq-a{max-height:320px}
+  .faq-a p{padding:0 0 24px}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line-soft);padding:48px 0 40px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+  .foot-brand{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:800;font-size:17px}
+  .foot-brand svg{width:26px;height:26px}
+  .foot-links{display:flex;gap:26px;font-size:14px;color:var(--text-mid);flex-wrap:wrap}
+  .foot-links a:hover{color:var(--text)}
+  .foot-legal{width:100%;font-size:13px;color:var(--muted);margin-top:12px}
+</style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav__inner">
-    <a class="wordmark" href="/">
-      <img src="/assets/valen-mark.png" alt="">
-      Valen
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M32 2 H68 Q72 2 75 5 L95 25 Q98 28 98 32 V68 Q98 72 95 75 L75 95 Q72 98 68 98 H32 Q28 98 25 95 L5 75 Q2 72 2 68 V32 Q2 28 5 25 L25 5 Q28 2 32 2 Z" fill="#8B7BF7"/><path d="M24 23 L50 85 L76 23 L62 23 L50 53 L38 23 Z" fill="#0B0B0F"/></svg>
+      VALEN
     </a>
-    <div class="nav__links">
-      <a href="#privacy-note">Privacy</a>
-      <a href="/privacy">Policy</a>
-      <a href="mailto:hello@getvalen.app">Contact</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+      <a href="#beta" class="nav-cta">Get early access</a>
     </div>
   </div>
 </nav>
 
-<!-- Hero. The mark is the thesis: a circuit board in the shape of a V.
-     The product is an AI that reads your training. Everything else stays quiet. -->
-<header class="hero">
-  <div class="hero__inner">
-    <img class="hero__mark" src="/assets/valen-mark.png" alt="The Valen mark — a circuit board in the shape of a V">
-    <h1>A strength coach that remembers what you lifted.</h1>
-    <p class="hero__lede">
-      Most training apps are a spreadsheet with a logo. Valen reads your actual
-      history — every set, every personal best, every week you missed — and coaches
-      you from it.
-    </p>
-    <span class="pill">Coming to Android</span>
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <svg class="hero-badge" viewBox="0 0 100 100" aria-label="Valen">
+      <path d="M32 2 H68 Q72 2 75 5 L95 25 Q98 28 98 32 V68 Q98 72 95 75 L75 95 Q72 98 68 98 H32 Q28 98 25 95 L5 75 Q2 72 2 68 V32 Q2 28 5 25 L25 5 Q28 2 32 2 Z" fill="#8B7BF7"/>
+      <path d="M24 23 L50 85 L76 23 L62 23 L50 53 L38 23 Z" fill="#0B0B0F"/>
+    </svg>
+    <!-- HERO_TAGLINE: swap headline when the tagline lands -->
+    <h1>Walk in <span class="accent">knowing.</span></h1>
+    <p class="hero-sub">Valen is an AI strength coach that plans every session for you — so you never stand in the gym wondering what to do. Your training stays on your phone.</p>
+    <div class="hero-cta-row">
+      <a href="#beta" class="btn btn-primary">Get early access</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <p class="hero-note">Free to start · Android now, iOS coming · No account needed to track workouts</p>
   </div>
 </header>
 
-<section class="screens">
-  <figure class="screen">
-    <img src="/assets/shot-coach.png" alt="The Valen home screen, showing the AI coach greeting and the active training programme">
-    <h3>A coach with your context</h3>
-    <p>It opens knowing you hit a PB on overhead press last session. Ask it anything — adjust the programme, say you feel overtrained, ask what to focus on.</p>
-  </figure>
-  <figure class="screen">
-    <img src="/assets/shot-workout.png" alt="An active workout in Valen — barbell deadlift sets logged at 82.5kg, a personal best marked, and the rest timer counting down">
-    <h3>Then it gets out of the way</h3>
-    <p>Tap a set, type the weight, done. Personal bests are caught as they happen. The rest timer runs itself and survives you locking the phone.</p>
-  </figure>
-  <figure class="screen">
-    <img src="/assets/shot-progress.png" alt="The Progress screen, showing week streak, strength score, muscle balance and recent personal bests">
-    <h3>Progress you can read</h3>
-    <p>Streaks, strength score, muscle balance across the last thirty days, and every personal best with an estimated one-rep max. Seventy-six milestones to chase.</p>
-  </figure>
-</section>
-
-<!-- The privacy story is the strongest thing Valen has to say, and it is
-     unusual enough to be worth a whole band rather than a footnote. -->
-<section class="band" id="privacy-note">
+<!-- ================= PROBLEM ================= -->
+<section class="problem" id="why">
   <div class="wrap">
-    <h2>Your training stays on your phone.</h2>
-    <p>
-      Every workout, every programme, every personal best — stored on your device and
-      nowhere else. We never upload it, and we cannot see it. An account exists only to
-      unlock the AI coach; the rest of Valen works without one.
-    </p>
-    <ul class="facts">
-      <li><strong>No analytics</strong>We don't know how often you open the app, or which screens you visit.</li>
-      <li><strong>No tracking</strong>No ad networks, no third-party SDKs, nothing following you around.</li>
-      <li><strong>No stored conversations</strong>We count coach requests. We don't keep what was said.</li>
-    </ul>
-    <p style="margin-top:1.75rem;">
-      The full detail — including exactly what the AI coach sends, and to whom —
-      is in the <a href="/privacy">Privacy Policy</a>. It's written to be read.
-    </p>
+    <div class="problem-quote">
+      <p>Most fitness apps hand you a blank screen and a library of 800 exercises. <span class="dim">Then they wait for you to figure it out.</span></p>
+      <p class="foot">Valen was built the other way round. You show up — it already knows the plan.</p>
+    </div>
   </div>
 </section>
 
-<section class="section">
+<!-- ================= HOW / FEATURES ================= -->
+<section id="how">
   <div class="wrap">
-    <h2>Built by one person, deliberately.</h2>
-    <p>
-      Valen is made by <span class="ph">[COMPANY NAME]</span>, a small independent studio in
-      Lancashire, England. There's no growth team and no ad budget — which is why there's
-      no advertising in the app, and why your data isn't the product.
-    </p>
-    <p>
-      Questions, bugs, or feature requests go straight to a real inbox:
-      <a href="mailto:hello@getvalen.app">hello@getvalen.app</a>.
-    </p>
+    <div class="section-head center">
+      <span class="eyebrow">What it does</span>
+      <h2>A coach, not a spreadsheet</h2>
+      <p>Valen decides what you train, adjusts as you go, and tells you the truth about how it's going.</p>
+    </div>
+    <div class="features">
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+        <h3>It plans the session</h3>
+        <p>Open the app and today's workout is already there — built around your goal, your history and what you trained last. No blank page, no deciding.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+        <h3>It reads your numbers</h3>
+        <p>Every set you log feeds back in. Valen tracks your lifts, spots your personal bests, and adjusts your next session's targets to match how you're actually moving.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <h3>It won't flatter you</h3>
+        <p>No hollow praise. If a week slipped, Valen says so — kindly — and gives you the next step. When you've genuinely earned it, you'll know it meant something.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Track without an account</h3>
+        <p>Log workouts, hit PBs, earn milestones — all with no sign-up. You only ever create an account if you want the AI coach.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg></div>
+        <h3>Milestones worth sharing</h3>
+        <p>PBs, streaks and milestones become clean cards you can post — proof of the work, not a leaderboard you have to perform on.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+        <h3>Yours, and only yours</h3>
+        <p>Your workouts, body weight and history live on your device. We can't see them. Nobody can. See below for exactly what that means.</p>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ================= PRIVACY ================= -->
+<section class="privacy" id="privacy">
+  <div class="wrap">
+    <div class="privacy-grid">
+      <div>
+        <span class="eyebrow">Privacy by architecture</span>
+        <h2>Your data never leaves your phone</h2>
+        <p>Every other strength app keeps your entire training history on its servers. <span class="highlight">Valen doesn't have servers for your data.</span> Your workouts, programmes, personal bests and body weight are stored only on your device.</p>
+        <p>The only things that ever leave are your email — if you make an account — and your message to the coach, with a training summary, when you ask it something. <span class="highlight">We designed it this way on purpose,</span> and we can't undo it even if we wanted to.</p>
+        <p style="margin-top:24px"><a href="/privacy" style="color:var(--violet-bright);font-weight:600">Read the full privacy policy →</a></p>
+      </div>
+      <div class="boundary" aria-label="What stays and what leaves">
+        <div class="b-row"><span class="k">Workouts, sets, weights</span><span class="b-tag b-stay">Stays</span></div>
+        <div class="b-row"><span class="k">Body weight &amp; history</span><span class="b-tag b-stay">Stays</span></div>
+        <div class="b-row"><span class="k">Personal bests</span><span class="b-tag b-stay">Stays</span></div>
+        <div class="b-row"><span class="k">Your surname &amp; height</span><span class="b-tag b-stay">Stays</span></div>
+        <div class="b-row"><span class="k">Email (if you sign up)</span><span class="b-tag b-go">Leaves</span></div>
+        <div class="b-row"><span class="k">Coach message + summary</span><span class="b-tag b-go">Leaves</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE (stubs) ================= -->
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Honest comparisons</span>
+      <h2>Valen vs the rest</h2>
+      <p>Fair, detailed write-ups of how Valen stacks up against the apps you already know. Coming soon.</p>
+    </div>
+    <div class="compare-grid">
+      <a href="/compare/fitbod" class="cmp">
+        <span class="vs">Valen vs</span>
+        <h3>Fitbod</h3>
+        <span class="arrow">Read the comparison →</span>
+      </a>
+      <a href="/compare/hevy" class="cmp">
+        <span class="vs">Valen vs</span>
+        <h3>Hevy</h3>
+        <span class="arrow">Read the comparison →</span>
+      </a>
+      <a href="/compare/strong" class="cmp">
+        <span class="vs">Valen vs</span>
+        <h3>Strong</h3>
+        <span class="arrow">Read the comparison →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BETA ================= -->
+<section class="beta" id="beta">
+  <div class="wrap">
+    <div class="beta-card">
+      <span class="eyebrow">Early access</span>
+      <h2>Be one of the first to train with Valen</h2>
+      <p>We're opening a small closed beta on Android now, with iOS to follow. Leave your email and we'll invite you in.</p>
+      <form class="signup" id="signup-form">
+        <input type="email" id="email" name="email" placeholder="you@email.com" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Request access</button>
+      </form>
+      <div class="form-msg" id="form-msg" role="status" aria-live="polite"></div>
+      <p class="signup-note">We'll only email you about Valen's launch — nothing else. See our <a href="/privacy">privacy policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Questions</span>
+      <h2>The things people ask</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Is it free?</button>
+        <div class="faq-a"><p>Workout tracking, programmes, personal bests and milestones are free, with no account required. The AI coach will be part of a paid tier — final pricing is still being set, and early-access testers will get it free during the beta.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need an account?</button>
+        <div class="faq-a"><p>Not to track your training. You only create an account — a passwordless one, just an email — if you want to use the AI coach, because that's the only feature that sends anything off your device.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What data do you collect about me?</button>
+        <div class="faq-a"><p>As little as possible. Your training stays on your phone. If you use the coach, your message and a training summary go to our AI provider to generate a reply; if you make an account, we hold your email. No analytics, no tracking, no advertising. The full detail is in our privacy policy.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">When is it out?</button>
+        <div class="faq-a"><p>A closed Android beta is opening now — join the early-access list above. iOS follows once we're through the beta. A wider public launch is planned for early 2027.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What makes it different from Fitbod or Hevy?</button>
+        <div class="faq-a"><p>Two things. Valen keeps your data on your device instead of on a server. And its coach is one honest character across the whole app that won't flatter a bad week. Detailed comparisons are coming to the Compare section above.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <p><strong style="color:var(--muted);">Valen</strong></p>
-        <p><a href="/privacy">Privacy Policy</a></p>
-        <p><a href="mailto:hello@getvalen.app">hello@getvalen.app</a></p>
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M32 2 H68 Q72 2 75 5 L95 25 Q98 28 98 32 V68 Q98 72 95 75 L75 95 Q72 98 68 98 H32 Q28 98 25 95 L5 75 Q2 72 2 68 V32 Q2 28 5 25 L25 5 Q28 2 32 2 Z" fill="#8B7BF7"/><path d="M24 23 L50 85 L76 23 L62 23 L50 53 L38 23 Z" fill="#0B0B0F"/></svg>
+        VALEN
       </div>
-      <div>
-        <!-- Play organisation verification cross-references the website against
-             the D-U-N-S record. These details must match Companies House exactly. -->
-        <p><span class="ph">[COMPANY NAME]</span></p>
-        <p>Registered in England &amp; Wales</p>
-        <p>Company no. <span class="ph">[COMPANY NUMBER]</span></p>
-        <p><span class="ph">[REGISTERED OFFICE ADDRESS]</span></p>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#compare">Compare</a>
+        <a href="#beta">Early access</a>
+        <a href="/privacy">Privacy policy</a>
       </div>
+      <p class="foot-legal">© 2026 Valen. Built by Oscar Codes. UK.</p>
     </div>
   </div>
 </footer>
 
+<script>
+  /* FAQ accordion */
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=q.parentElement;
+      var open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});
+      if(!open)item.classList.add('open');
+    });
+  });
+
+  /* Email signup -> Formspree
+     CONFIG: replace FORMSPREE_ENDPOINT with your form URL,
+     e.g. https://formspree.io/f/abcdwxyz */
+  var FORMSPREE_ENDPOINT = 'FORMSPREE_ENDPOINT';
+  var form=document.getElementById('signup-form');
+  var msg=document.getElementById('form-msg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=document.getElementById('email').value.trim();
+    if(!email){return}
+    if(FORMSPREE_ENDPOINT==='FORMSPREE_ENDPOINT'){
+      msg.className='form-msg err';
+      msg.textContent='Form not connected yet — add your Formspree endpoint.';
+      return;
+    }
+    msg.className='form-msg';msg.textContent='Sending…';
+    fetch(FORMSPREE_ENDPOINT,{
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body:new FormData(form)
+    }).then(function(r){
+      if(r.ok){
+        form.reset();
+        msg.className='form-msg ok';
+        msg.textContent="You're on the list. We'll be in touch.";
+      }else{
+        msg.className='form-msg err';
+        msg.textContent='Something went wrong — try again in a moment.';
+      }
+    }).catch(function(){
+      msg.className='form-msg err';
+      msg.textContent='Something went wrong — try again in a moment.';
+    });
+  });
+</script>
 </body>
 </html>
