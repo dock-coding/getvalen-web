@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valen vs Fitbod — an honest comparison</title>
+<meta name="description" content="Valen vs Fitbod, compared fairly: AI programming, pricing, privacy and who each one is really for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B0B0F;--bg-raise:#12121A;--card:#14141D;--line:#232331;--line-soft:#1B1B26;
+    --violet:#8B7BF7;--violet-bright:#9E8FFF;--amber:#F5A656;--text:#F4F4F7;--mid:#B4B4C2;--muted:#71717F;--maxw:900px;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Sora';line-height:1.12;letter-spacing:-.02em;font-weight:800}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--violet-bright)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,15,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:800;font-size:18px;letter-spacing:.02em}
+  .brand svg{width:30px;height:30px}
+  .nav-cta{background:var(--violet);color:#0B0B0F!important;padding:9px 18px;border-radius:9px;font-weight:700;font-size:14px}
+
+  .hero{padding:72px 0 44px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:760px;height:460px;background:radial-gradient(ellipse,rgba(139,123,247,.15),transparent 65%);pointer-events:none}
+  .hero h1{font-size:clamp(32px,5.4vw,52px);position:relative;margin-bottom:16px}
+  .hero h1 .g{color:var(--violet-bright)}
+  .hero p{font-size:18px;color:var(--mid);max-width:620px;margin:0 auto;position:relative}
+  .updated{font-size:12px;color:var(--muted);margin-top:20px;position:relative}
+
+  .tldr{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 30px;margin:36px 0}
+  .tldr h2{font-size:16px;margin-bottom:14px;color:var(--violet-bright);letter-spacing:.02em}
+  .tldr p{color:var(--mid);font-size:16px;margin-bottom:12px}
+  .tldr p:last-child{margin-bottom:0}
+  .tldr strong{color:var(--text)}
+
+  section{padding:30px 0}
+  h2.sec{font-size:clamp(24px,3.4vw,32px);margin-bottom:8px}
+  .sec-sub{color:var(--mid);margin-bottom:24px;font-size:16px}
+  p.body{color:var(--mid);font-size:16px;margin-bottom:16px}
+  p.body strong{color:var(--text)}
+
+  .table-scroll{overflow-x:auto;margin:8px 0 24px;border:1px solid var(--line);border-radius:14px}
+  table{width:100%;border-collapse:collapse;min-width:520px}
+  th,td{text-align:left;padding:15px 18px;font-size:15px;border-bottom:1px solid var(--line-soft)}
+  thead th{background:var(--bg-raise);font-family:'Sora';font-weight:700;font-size:14px}
+  thead th:first-child{color:var(--muted)}
+  tbody tr:last-child td{border-bottom:none}
+  td.v{color:var(--text)}
+  .col-valen{color:var(--violet-bright)!important;font-weight:600}
+  .checkbad{color:var(--muted)}
+
+  .verdict{background:linear-gradient(180deg,var(--bg),#0E0C14);border:1px solid var(--line);border-radius:16px;padding:30px;margin:28px 0}
+  .verdict h3{font-size:20px;margin-bottom:14px}
+  .verdict p{color:var(--mid);font-size:16px;margin-bottom:14px}
+  .verdict p:last-child{margin-bottom:0}
+  .verdict strong{color:var(--text)}
+  .pick{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.05em;padding:5px 11px;border-radius:20px;margin-bottom:14px}
+  .pick-them{background:rgba(245,166,86,.13);color:var(--amber);border:1px solid rgba(245,166,86,.28)}
+  .pick-us{background:rgba(139,123,247,.14);color:var(--violet-bright);border:1px solid rgba(139,123,247,.28)}
+
+  .cta{text-align:center;padding:56px 0 40px}
+  .cta h2{font-size:clamp(24px,3.6vw,34px);margin-bottom:14px}
+  .cta p{color:var(--mid);margin-bottom:26px}
+  .btn{padding:15px 32px;border-radius:11px;font-weight:700;font-size:16px;background:var(--violet);color:#0B0B0F;display:inline-block;transition:background .15s}
+  .btn:hover{background:var(--violet-bright)}
+
+  .disc{font-size:13px;color:var(--muted);border-top:1px solid var(--line-soft);padding:26px 0 10px;line-height:1.6}
+  footer{border-top:1px solid var(--line-soft);padding:34px 0;margin-top:20px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot-brand{display:flex;align-items:center;gap:10px;font-family:'Sora';font-weight:800;font-size:16px}
+  .foot-brand svg{width:24px;height:24px}
+  .foot-links{display:flex;gap:22px;font-size:14px;color:var(--mid);flex-wrap:wrap}
+  .other-compares{display:flex;gap:12px;margin:10px 0 0;flex-wrap:wrap}
+  .other-compares a{font-size:14px;color:var(--violet-bright);font-weight:600}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 100 100"><path d="M32 2 H68 Q72 2 75 5 L95 25 Q98 28 98 32 V68 Q98 72 95 75 L75 95 Q72 98 68 98 H32 Q28 98 25 95 L5 75 Q2 72 2 68 V32 Q2 28 5 25 L25 5 Q28 2 32 2 Z" fill="#8B7BF7"/><path d="M24 23 L50 85 L76 23 L62 23 L50 53 L38 23 Z" fill="#0B0B0F"/></svg>
+      VALEN
+    </a>
+    <a href="/#beta" class="nav-cta">Get early access</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Valen <span class="g">vs</span> Fitbod</h1>
+    <p>Both hand you a plan instead of a blank screen. The difference is what it costs, and where your data lives.</p>
+    <p class="updated">Written to be fair. Pricing verified July 2026.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="tldr">
+    <h2>The short version</h2>
+    <p><strong>Fitbod</strong> is the most polished automatic workout generator in the category — a mature algorithm, a 1,600-exercise library, HD video for every movement, and eleven years of refinement behind it. If you want a proven, hands-off generator and the price doesn't bother you, it's an easy recommendation.</p>
+    <p><strong>Valen</strong> is younger and smaller, and honest about it. It does two things Fitbod doesn't: it keeps your training data on your phone rather than on a server, and its coach is a single honest voice that talks to you across the whole app instead of silently generating a session. If privacy and a coach that actually says something matter more to you than library size, Valen is the one to try.</p>
+  </div>
+
+  <section>
+    <h2 class="sec">At a glance</h2>
+    <p class="sec-sub">The facts, side by side. No thumbs on the scale.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>&nbsp;</th><th class="col-valen">Valen</th><th>Fitbod</th></tr></thead>
+        <tbody>
+          <tr><td>Plans your session for you</td><td class="v col-valen">Yes</td><td class="v">Yes</td></tr>
+          <tr><td>Conversational AI coach</td><td class="v col-valen">Yes — one voice, whole app</td><td class="v checkbad">No</td></tr>
+          <tr><td>Adjusts targets from your results</td><td class="v col-valen">Yes</td><td class="v">Yes</td></tr>
+          <tr><td>Exercise library</td><td class="v">212</td><td class="v">1,600+</td></tr>
+          <tr><td>Exercise video demos</td><td class="v">In progress</td><td class="v">Yes, all</td></tr>
+          <tr><td>Data stored on your device only</td><td class="v col-valen">Yes</td><td class="v checkbad">No — cloud</td></tr>
+          <tr><td>Track without an account</td><td class="v col-valen">Yes</td><td class="v checkbad">No</td></tr>
+          <tr><td>Price (annual)</td><td class="v col-valen">TBC — free tier planned</td><td class="v">$95.99/yr</td></tr>
+          <tr><td>Free tier</td><td class="v col-valen">Yes — full tracking</td><td class="v">7-day trial only</td></tr>
+          <tr><td>Platforms</td><td class="v">Android now, iOS soon</td><td class="v">iOS &amp; Android</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Where Fitbod is genuinely ahead</h2>
+    <p class="body">We're not going to pretend otherwise. <strong>Fitbod's library is roughly eight times the size of ours</strong>, and every movement has an HD video demo — which matters a lot if you're new and don't know what an exercise looks like. Its algorithm has had eleven years and over 150 million logged workouts to mature. And it's on both platforms today, where Valen is Android-first with iOS still coming.</p>
+    <p class="body">If your priority is the deepest, most proven automatic generator and you'll happily pay for it, Fitbod has earned that position.</p>
+  </section>
+
+  <section>
+    <h2 class="sec">Where Valen is different</h2>
+    <p class="body"><strong>Your data never leaves your phone.</strong> Fitbod, like every mainstream tracker, keeps your full history on its servers and syncs your body metrics from Apple Health. Valen stores your workouts, body weight and history only on your device — we have no copy and can't see them. That's not a setting; it's how the app is built.</p>
+    <p class="body"><strong>The coach actually talks.</strong> Fitbod has no conversational coach — it generates a session and leaves you to it. Valen's coach is one consistent character across programme building, your post-workout debrief and general chat, and it won't flatter a bad week. Some people want a silent generator; if you want something that feels like a coach, that's the gap.</p>
+    <p class="body"><strong>You can start free, and without an account.</strong> Fitbod's free tier is a 7-day trial that then stops working. Valen's tracking is free and needs no sign-up at all — you only make an account if you want the coach.</p>
+  </section>
+
+  <section>
+    <div class="verdict">
+      <span class="pick pick-them">Choose Fitbod if…</span>
+      <p>You want the most mature hands-off generator, you value a huge library with video for every exercise, you're on iOS today, and the price isn't a barrier. It's the safe, polished pick.</p>
+    </div>
+    <div class="verdict">
+      <span class="pick pick-us">Choose Valen if…</span>
+      <p>You want your training data to stay private on your device, you'd rather have a coach that speaks honestly than an algorithm that stays silent, and you want to start free without handing over an account. <strong>You'll trade library size for privacy and a real voice.</strong></p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Try the private one</h2>
+    <p>Valen is opening a small beta now. See what a coach that keeps its mouth shut about your data feels like.</p>
+    <a href="/#beta" class="btn">Get early access</a>
+    <div class="other-compares" style="justify-content:center">
+      <a href="/compare/hevy">Valen vs Hevy →</a>
+      <a href="/compare/strong">Valen vs Strong →</a>
+    </div>
+  </div>
+
+  <p class="disc">Comparison written by the Valen team. We've tried to represent Fitbod fairly and cite verified figures, but we obviously have a horse in this race — so check the numbers yourself before deciding. Fitbod pricing and features from public sources, July 2026; they change, and legacy subscribers may pay less. Fitbod is a trademark of its owner; this page isn't affiliated with or endorsed by them.</p>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100"><path d="M32 2 H68 Q72 2 75 5 L95 25 Q98 28 98 32 V68 Q98 72 95 75 L75 95 Q72 98 68 98 H32 Q28 98 25 95 L5 75 Q2 72 2 68 V32 Q2 28 5 25 L25 5 Q28 2 32 2 Z" fill="#8B7BF7"/><path d="M24 23 L50 85 L76 23 L62 23 L50 53 L38 23 Z" fill="#0B0B0F"/></svg>
+        VALEN
+      </div>
+      <div class="foot-links">
+        <a href="/">Home</a><a href="/#privacy">Privacy</a><a href="/privacy">Privacy policy</a><a href="/#beta">Early access</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -17,7 +17,12 @@
 <!-- ⚠️ DELETE THIS ENTIRE <div> BEFORE PUBLISHING ⚠️ -->
 <div class="draft-banner">
   <strong>DRAFT — NOT PUBLISHED.</strong>
-  Placeholders are highlighted in yellow. Fill them all, verify the two flagged items, delete this banner.
+  Placeholders are highlighted in yellow.
+  <br><strong>Blocked on incorporation:</strong> company name, company number, registered office, ICO number, dates.
+  <br><strong>Blocked on you:</strong> minimum age (§11).
+  <br><strong>Still unverified:</strong> Formspree's transfer safeguard (§6). Anthropic's is confirmed.
+  <br><strong>Added this revision:</strong> §3.1 encrypted backups + §3 callout rewrite + §5 line. Bump the app-side <code>policyVersion</code> to match before this goes live.
+  <br>Fill them all, then delete this banner.
 </div>
 <!-- ⚠️ END OF BANNER ⚠️ -->
 
@@ -43,19 +48,20 @@
 
   <p>Your workouts, programmes, personal bests, body weight and profile are stored only on your device. We never upload them to a server, and we cannot see them.</p>
 
-  <p>Two things do leave your phone: <strong>your email address</strong>, if you create an account — and <strong>context for the AI coach</strong>, when you ask it a question.</p>
+  <p>Two things do leave your phone: <strong>your email address</strong>, if you create an account — and <strong>your message to the AI coach, together with a summary of your training</strong>, when you ask it a question. Nothing else, ever.</p>
 
   <!-- The signature element: the whole policy in one picture. -->
   <div class="boundary">
     <div class="boundary__side boundary__side--stays">
       <p class="boundary__head">Stays on your phone</p>
       <ul class="chips">
-        <li><span class="chip chip--stays">Workouts, sets, reps, weights</span></li>
+        <li><span class="chip chip--stays">The full record of every workout</span></li>
         <li><span class="chip chip--stays">Programmes</span></li>
         <li><span class="chip chip--stays">Personal bests &amp; milestones</span></li>
-        <li><span class="chip chip--stays">Body weight &amp; history</span></li>
-        <li><span class="chip chip--stays">Height, date of birth, sex</span></li>
-        <li><span class="chip chip--stays">Name &amp; training goal</span></li>
+        <li><span class="chip chip--stays">Your body weight, as a number</span></li>
+        <li><span class="chip chip--stays">Your height</span></li>
+        <li><span class="chip chip--stays">Your date of birth</span></li>
+        <li><span class="chip chip--stays">Your surname</span></li>
         <li><span class="chip chip--stays">Water intake</span></li>
         <li><span class="chip chip--stays">Settings &amp; theme</span></li>
       </ul>
@@ -70,8 +76,10 @@
           <span class="chip__where">Supabase · Ireland</span></span></li>
         <li><span class="chip chip--goes">Monthly usage counts
           <span class="chip__where">Our server · London</span></span></li>
-        <li><span class="chip chip--goes">Coach message + training context
-          <span class="chip__where">Anthropic · United States</span></span></li>
+        <li><span class="chip chip--goes">What you say to the coach
+          <span class="chip__where">Anthropic · see §4.3</span></span></li>
+        <li><span class="chip chip--goes">Training summary, goal, age, sex
+          <span class="chip__where">Anthropic · see §4.3</span></span></li>
         <li><span class="chip chip--goes">Sign-in code emails
           <span class="chip__where">Brevo · France</span></span></li>
         <li><span class="chip chip--goes">Feedback you type
@@ -82,7 +90,16 @@
     <p class="boundary__note">
       <strong>Nothing on the right happens unless you use the coach or send feedback.</strong>
       No analytics. No crash reporting. No advertising. No tracking of any kind.
-      We do not store what you or the coach say — only how many times you asked.
+      <strong>We</strong> never store what you or the coach say — only how many times you asked.
+      Anthropic holds it briefly in order to answer you: see §8.
+    </p>
+
+    <p class="boundary__note">
+      <strong>One honest caveat about the left-hand column.</strong>
+      The <em>full record</em> stays on your phone and we never get a copy. But when you send the
+      coach a message, a <em>summary</em> of your recent training goes with it — the last few
+      sessions, your main lifts, your recent PBs. The coach cannot help with training it cannot
+      see. Section 4.3 sets out exactly what is in that summary, down to the field.
     </p>
   </div>
 
@@ -120,7 +137,7 @@
 
   <h2 id="s3"><span class="num">03</span> What stays on your device</h2>
 
-  <p>The following is stored <strong>locally on your phone only</strong>. It is never uploaded to us or to anyone else. We have no copy of it, and we cannot access it:</p>
+  <p>The following is stored <strong>locally on your phone only</strong>. It is never uploaded to us. We have no copy of it, we cannot access it, and we cannot recover it for you:</p>
 
   <ul>
     <li>Your name and training goal</li>
@@ -134,8 +151,26 @@
   </ul>
 
   <div class="callout">
-    <p><strong>A consequence worth understanding.</strong> Because we hold no copy, we cannot restore this data for you. If you uninstall Valen, change phone, or clear the app's data, <strong>your training history is gone.</strong> We do not yet offer a backup or transfer feature. We are working on one — but until it exists, this is the trade-off that comes with data that never leaves your phone.</p>
+    <p><strong>But read section 4.3 as well.</strong> If — and only if — you use the AI coach, <em>some</em> of the above is summarised and sent to Anthropic so the coach has something to work with. Your height, your date of birth, your surname and your body weight as a number are <strong>never</strong> sent. Your age, your biological sex, your goal, and a summary of your recent training <strong>are</strong>. Section 4.3 lists it field by field.</p>
   </div>
+
+  <div class="callout">
+    <p><strong>A consequence worth understanding.</strong> Because we hold no copy, we cannot restore this data for you. If you uninstall Valen, change phone, or clear the app's data, <strong>your training history is gone</strong> — unless you have made a backup yourself. Valen now lets you export an encrypted backup file that you control; see section 3.1. We still never receive a copy, and we still cannot recover your data if you lose both your phone and your backup. That is the trade-off that comes with data that never leaves your phone without your say-so.</p>
+  </div>
+
+  <h3>3.1 &nbsp; Backing up your data</h3>
+
+  <p>Valen lets you export a <strong>backup file</strong> containing the data in section 3, so you can move to a new phone or guard against losing everything. You do this yourself, from within the app, and you decide where the file goes.</p>
+
+  <p><strong>The backup is encrypted with a passphrase you choose.</strong> The file is scrambled on your phone before it is saved, using your passphrase. Without that passphrase the file is unreadable — it is just noise. Anyone who gets hold of the file, including us, cannot open it.</p>
+
+  <div class="callout">
+    <p><strong>Two things follow from that, and both matter.</strong></p>
+    <p><strong>We cannot recover your backup, and we cannot reset the passphrase.</strong> We never receive the file and we never see your passphrase. If you forget it, the backup is gone for good — there is no "forgot password" link, because there is nothing on our side to reset. Choose a passphrase you will remember, and keep it somewhere safe.</p>
+    <p><strong>Once you export it, the file is yours to look after.</strong> It might contain health-related information — including the coach's notes about any injuries or limitations you have told it about (see 4.3.1). It is encrypted, so it is protected even if it falls into the wrong hands, but where you store it — your own cloud drive, a computer, a USB stick — is your choice and outside our control. Store it somewhere you trust.</p>
+  </div>
+
+  <p>A backup file never comes to us and never goes to Anthropic or any other provider. It travels only where <em>you</em> send it. Restoring from a backup happens entirely on your phone: you open the file in Valen, enter your passphrase, and your data is decrypted back onto the device.</p>
 
   <h2 id="s4"><span class="num">04</span> What leaves your device</h2>
 
@@ -143,7 +178,7 @@
 
   <p>To use <strong>Valen Coach</strong> you sign in with your email address. You do not need an account for the rest of Valen — tracking workouts, building programmes, and everything in section 3 works with no account at all.</p>
 
-  <p>We use <strong>Supabase</strong> to manage sign-in. When you create an account we hold your email address, an anonymous account identifier, and timestamps for when you signed in. Sign-in is passwordless, so we never hold a password for you.</p>
+  <p>We use <strong>Supabase</strong> to manage sign-in. When you create an account we hold your email address, an account identifier, and timestamps for when you signed in. Sign-in is passwordless, so we never hold a password for you.</p>
 
   <div class="table-scroll">
   <table>
@@ -173,27 +208,54 @@
 
   <p>When you send a message to Valen Coach, we pass your message, together with relevant context from your training data, to <strong>Anthropic</strong> — the company that provides the AI model behind the coach.</p>
 
-  <p>That context can include:</p>
+  <p><strong>What is sent:</strong></p>
 
   <ul>
-    <li>Recent workouts, exercises, sets, reps and weights</li>
-    <li>Personal bests and strength scores</li>
-    <li>Your training goal, experience level and available equipment</li>
-    <li>Your body metrics — body weight, height, age and biological sex</li>
-    <li>Your name, if you have given one</li>
+    <li>Your message, exactly as you typed it</li>
+    <li>A summary of your last few workouts — exercises, sets, reps and weights</li>
+    <li>Your main lifts and whether they are progressing, stalled or dropping</li>
+    <li>Personal bests from the last two weeks</li>
+    <li>How consistently you have been training, and your usual training days</li>
+    <li>Your training goal, experience level, training location and available equipment</li>
+    <li>Your first name, your age, and your biological sex</li>
+    <li>Whether your body weight is trending up, down or holding — and by roughly how much</li>
+    <li>The coach's own notes about you (see below)</li>
   </ul>
 
-  <p>Anthropic processes this to generate the coach's reply and returns it to your phone. <strong>Neither we nor Anthropic use your data to train AI models.</strong> We do not store the conversation — once the reply reaches your phone, it lives on your device like everything else in section 3.</p>
+  <p><strong>What is not sent:</strong></p>
+
+  <ul>
+    <li>Your surname</li>
+    <li>Your height</li>
+    <li>Your body weight as a number — only the direction it is moving</li>
+    <li>Your date of birth — only your age in years</li>
+    <li>Your email address</li>
+    <li>Your full training history — only the recent summary above</li>
+  </ul>
+
+  <p>We removed the first four of those deliberately. The coach does not need them, so they do not travel.</p>
+
+  <p>Anthropic processes this to generate the coach's reply and returns it to your phone. <strong>Neither we nor Anthropic use your data to train AI models</strong> — for Anthropic, this is a term of our contract with them, not just a policy. We do not store the conversation: once the reply reaches your phone, it lives on your device like everything else in section 3.</p>
 
   <div class="table-scroll">
   <table>
-    <tr><th>Processed</th><td>Anthropic, United States — see section 6</td></tr>
+    <tr><th>Provider</th><td>Anthropic Ireland Limited, who we contract with. Your data is stored on Anthropic's servers in the <strong>United States</strong> — see section 6</td></tr>
     <tr><th>Lawful basis</th><td>Contract — Article 6(1)(b) — and <strong>your explicit consent</strong> for the health-related elements — Article 9(2)(a). See section 5</td></tr>
   </table>
   </div>
 
+  <h3>4.3.1 &nbsp; What you tell the coach, and what it remembers</h3>
+
+  <p>This is the part people do not expect, so we want to be blunt about it.</p>
+
+  <p><strong>Anything you say to the coach is sent to Anthropic.</strong> There is no filter. If you mention an injury, pain, an illness, a medication, or anything else about your health, that goes too — because a coach can only work around your bad shoulder if you tell it about your bad shoulder. Valen will sometimes <em>ask</em> you about injuries when it builds you a programme. You do not have to answer.</p>
+
+  <p><strong>The coach also keeps notes.</strong> When it learns something durable about you — an injury, a limitation, a preference, what you are actually training for — it writes itself a short note so it does not have to ask you twice. Those notes are stored on your phone, and <strong>they are sent to Anthropic again every time you talk to the coach</strong>, not just on the day you mentioned it. A note that your knee is bad will keep travelling with your messages for as long as it is useful.</p>
+
+  <p>The notes live on your device. Erasing your local data (section 9) deletes them.</p>
+
   <div class="callout">
-    <p><strong>If you never use the coach, none of this happens.</strong> Nothing in this section applies to you unless you sign in and send a message.</p>
+    <p><strong>If you never use the coach, none of this happens.</strong> Nothing in section 4.3 applies to you unless you sign in, consent, and send a message. Everything else in Valen works without an account.</p>
   </div>
 
   <h3>4.4 &nbsp; Feedback</h3>
@@ -204,13 +266,17 @@
 
   <h2 id="s5"><span class="num">05</span> Health data and your consent</h2>
 
-  <p>Some of what Valen handles — your body weight, date of birth, biological sex and training history — counts as <strong>health data</strong> under UK and EU data protection law, which gives it stronger protection than ordinary personal data.</p>
+  <p>Some of what Valen handles — your body weight, your training history, and anything you tell the coach about injuries or illness — counts as <strong>health data</strong> under UK and EU data protection law, which gives it stronger protection than ordinary personal data.</p>
 
-  <p>While that information stays on your phone, we are not processing it at all, and no special rules are engaged.</p>
+  <p>While that information stays on your phone, we are not processing it at all, and no special rules are engaged. The same is true of a backup file you export (section 3.1): it is encrypted with your passphrase, it never reaches us, and we do not process what is inside it.</p>
 
-  <p><strong>The moment it matters is when you use the coach</strong>, because that is when health-related context is transmitted to Anthropic. For that we rely on <strong>your explicit consent</strong> (Article 9(2)(a) UK GDPR). You give that consent when you sign in to use the coach, and we tell you plainly at that point what will be sent and to whom.</p>
+  <p><strong>The moment it matters is when you use the coach</strong>, because that is when health-related information is transmitted to Anthropic. For that we rely on <strong>your explicit consent</strong> (Article 9(2)(a) UK GDPR). You give that consent before you can use the coach for the first time, and we tell you plainly at that point what will be sent and to whom.</p>
 
-  <p>You can withdraw it at any time — by not using the coach, by signing out, or by deleting your account. Withdrawing consent does not affect anything that has already happened, and <strong>it does not touch your training data.</strong> Your workouts stay on your device either way.</p>
+  <p>We have cut what we can. Your body weight now travels only as a direction of travel, never as a number; your height and surname do not travel at all. But we will not pretend the coach can work without health information, and we would rather say so than bury it. <strong>Injuries and pain are the clearest example: if you want the coach to work around them, it has to know about them, and that means Anthropic sees them.</strong> That is the trade, stated plainly, and it is why we ask rather than assume.</p>
+
+  <p><strong>Consent is genuinely optional.</strong> Valen's workout tracking, programmes, personal bests, milestones and everything else in section 3 work fully without an account and without consent. Declining costs you the coach and nothing else.</p>
+
+  <p>You can withdraw consent at any time — by signing out, or by deleting your account. Withdrawing it does not affect anything that has already happened, and <strong>it does not touch your training data.</strong> Your workouts stay on your device either way.</p>
 
   <h2 id="s6"><span class="num">06</span> Sending data outside the UK</h2>
 
@@ -222,13 +288,15 @@
   <table>
     <thead><tr><th>Who</th><th>What</th><th>Why</th></tr></thead>
     <tbody>
-      <tr><td>Anthropic</td><td>Your coach message and training context (4.3)</td><td>To generate the coach's reply</td></tr>
+      <tr><td>Anthropic</td><td>Your coach message and training summary (4.3)</td><td>To generate the coach's reply</td></tr>
       <tr><td>Formspree</td><td>Whatever you type into Feedback (4.4)</td><td>To deliver it to us</td></tr>
     </tbody>
   </table>
   </div>
 
-  <p>Transfers to these providers are made under <span class="ph">[TRANSFER MECHANISM — VERIFY]</span>, which are legal safeguards designed to give your data protection comparable to that it has in the UK.</p>
+  <p>We contract with <strong>Anthropic Ireland Limited</strong>, but the data is stored in the United States. That transfer is made under the <strong>EU Standard Contractual Clauses, as supplemented by the UK International Data Transfer Addendum</strong> — legal safeguards designed to give your data protection comparable to that it has in the UK.</p>
+
+  <p>Transfers to <strong>Formspree</strong> are made under <span class="ph">[FORMSPREE TRANSFER MECHANISM — NOT YET VERIFIED]</span>.</p>
 
   <h2 id="s7"><span class="num">07</span> What we do not do</h2>
 
@@ -253,13 +321,16 @@
       <tr><td>Everything on your device (§3)</td><td>Until you delete it, reset the app, or uninstall. We hold no copy and cannot recover it</td></tr>
       <tr><td>Your account</td><td>Until you delete it. Then it is removed</td></tr>
       <tr><td>Monthly usage counts</td><td>Deleted with your account</td></tr>
-      <tr><td>Coach messages</td><td>Not stored by us at all</td></tr>
+      <tr><td>Coach messages</td><td>Not stored by us at all. Held by Anthropic for up to 30 days — see below</td></tr>
+      <tr><td>The coach's notes about you</td><td>On your phone until you erase your data. Sent to Anthropic with each message, and held by them on the same 30-day basis</td></tr>
       <tr><td>Feedback messages</td><td>Kept while we act on them, then deleted</td></tr>
     </tbody>
   </table>
   </div>
 
-  <p>Our providers keep their own operational records — email delivery logs, API request logs — under their own retention schedules. <span class="ph">[ANTHROPIC RETENTION PERIOD — VERIFY]</span></p>
+  <p>Our providers keep their own operational records — email delivery logs, API request logs — under their own retention schedules.</p>
+
+  <p><strong>Anthropic</strong> deletes what you send to the coach, and the reply, <strong>within 30 days</strong>. There is one exception: if their automated safety systems flag a request as breaching their usage policy, they may keep it for up to two years. We have no control over that and no visibility into it, so we would rather you knew.</p>
 
   <h2 id="s9"><span class="num">09</span> Deleting your account and your data</h2>
 
@@ -283,7 +354,7 @@
 
   <h3>If you have already uninstalled Valen</h3>
 
-  <p>You can still have your account deleted. Email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> from the address you signed up with, asking us to delete your account. We will delete it and confirm, normally within 30 days.</p>
+  <p>You can still have your account deleted. Email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> from the address you signed up with, asking us to delete your account. We will delete it and confirm within one month, and usually a great deal sooner.</p>
 
   <h2 id="s10"><span class="num">10</span> Your rights</h2>
 
@@ -291,15 +362,31 @@
 
   <p>In practice, the data we hold about you is small: your email address, an account identifier, sign-in timestamps, and monthly usage counts. Everything else is on your phone, where it is already yours.</p>
 
+  <p>That includes the coach's notes about you (4.3.1). They are on your device, not ours. Valen does not yet give you a screen to read them back — we are building one, because you should be able to see what your coach thinks it knows. In the meantime, erasing your local data (section 9) deletes them, and you can email us and ask.</p>
+
   <p>To exercise any of these rights, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a>. We will respond within one month.</p>
 
   <p>If you are unhappy with how we have handled your data, you can complain to the <a href="https://ico.org.uk">Information Commissioner's Office</a>, the UK's data protection regulator.</p>
 
   <!--
   ============================================================
-  EU REPRESENTATIVE — ACTIVATE ONLY WHEN DISTRIBUTING TO THE EU/EEA
+  ⚠️ EU REPRESENTATIVE — READ BEFORE YOU PUBLISH ON PLAY ⚠️
+
   Article 27 EU GDPR. A UK company offering a health-data app to EU
-  users needs a named representative in an EU member state.
+  users needs a named representative established in an EU member state.
+
+  THIS IS EASY TO TRIP OVER: Google Play distribution defaults to ALL
+  COUNTRIES. If you publish without restricting countries, you are
+  offering the app to EU residents from day one, and Article 27 bites
+  immediately.
+
+  Two options, decide before release:
+    (a) Restrict Play distribution to the UK only for the beta and the
+        first release. Costs nothing. Leave this block commented out.
+    (b) Appoint an EU representative (paid service, roughly £200-500/yr)
+        and uncomment this block.
+
+  Do NOT publish worldwide with this block commented out.
   ============================================================
   <h3>Our EU representative</h3>
   <p>Under Article 27 of the EU GDPR, our representative in the European Union is
@@ -322,7 +409,7 @@
 
   <h2 id="s11"><span class="num">11</span> Children</h2>
 
-  <p>Valen is not intended for anyone under <span class="ph">[16 / 18 — DECIDE]</span>, and we do not knowingly collect personal data from children. If you believe a child has created an account, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete it.</p>
+  <p>Valen is not intended for anyone under <span class="ph">[18 — CONFIRM]</span>, and we do not knowingly collect personal data from children. If you believe a child has created an account, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete it.</p>
 
   <h2 id="s12"><span class="num">12</span> Security</h2>
 
