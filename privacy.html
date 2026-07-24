@@ -18,10 +18,13 @@
 <div class="draft-banner">
   <strong>DRAFT — NOT PUBLISHED.</strong>
   Placeholders are highlighted in yellow.
-  <br><strong>Blocked on incorporation:</strong> company name, company number, registered office, ICO number, dates.
-  <br><strong>Blocked on you:</strong> minimum age (§11).
-  <br><strong>Still unverified:</strong> Formspree's transfer safeguard (§6). Anthropic's is confirmed.
-  <br><strong>Added this revision:</strong> §3.1 encrypted backups + §3 callout rewrite + §5 line. Bump the app-side <code>policyVersion</code> to match before this goes live.
+  <br><strong>Done:</strong> company name + registered office (§1); minimum age set to 18 (§11).
+  <br><strong>Still blocked:</strong> ICO registration number (§1) — must register and pay the £52 data protection fee before the first real beta user; both dates (set at deploy).
+  <br><strong>⚠️ Formspree removed from this policy (§00, §4.4, §6, §8).</strong> The app and website must ACTUALLY stop using Formspree before this publishes — the feedback endpoint on valen-proxy must be built, switched to, and delivery-confirmed first. Do not publish ahead of the code.
+  <br><strong>Code mismatch to fix:</strong> §11 says 18+, but onboarding currently accepts a DOB implying under-18. Add a DOB gate before launch.
+  <br><strong>Added this revision:</strong> §3.1 backup exclusions + consent-not-carried callout; new §3.2 restore safety copy (7 days); new §3.3 sign-in diagnostics (BETA ONLY); §7, §8, §9 updated to match. Bump the app-side <code>policyVersion</code> to match before this goes live.
+  <br><strong>⚠️ Beta-only removal task:</strong> §3.3, the §7 caveat and the §8 row must be deleted when the auth-diagnostics mechanism is removed (tracked in code at <code>AUTH_DIAG_ENABLED</code>).
+  <br><strong>⚠️ Sequencing:</strong> this must be deployed BEFORE any build with <code>AUTH_DIAG_ENABLED = true</code> reaches a tester.
   <br>Fill them all, then delete this banner.
 </div>
 <!-- ⚠️ END OF BANNER ⚠️ -->
@@ -83,7 +86,7 @@
         <li><span class="chip chip--goes">Sign-in code emails
           <span class="chip__where">Brevo · France</span></span></li>
         <li><span class="chip chip--goes">Feedback you type
-          <span class="chip__where">Formspree · United States</span></span></li>
+          <span class="chip__where">Our server · London</span></span></li>
       </ul>
     </div>
 
@@ -125,7 +128,7 @@
 
   <h2 id="s1"><span class="num">01</span> Who we are</h2>
 
-  <p>Valen is provided by <span class="ph">[COMPANY NAME]</span>, a company registered in England and Wales (company number <span class="ph">[COMPANY NUMBER]</span>), whose registered office is at <span class="ph">[REGISTERED OFFICE ADDRESS]</span>.</p>
+  <p>Valen is provided by <strong>Oscar Codes Ltd</strong>, a company registered in England and Wales (company number 17346219), whose registered office is at Suite A, 82 James Carter Road, Mildenhall, IP28 7DE.</p>
 
   <p>For the purposes of UK data protection law, we are the <strong>data controller</strong> for the personal data described here. We are registered with the Information Commissioner's Office under registration number <span class="ph">[ICO NUMBER]</span>.</p>
 
@@ -171,6 +174,39 @@
   </div>
 
   <p>A backup file never comes to us and never goes to Anthropic or any other provider. It travels only where <em>you</em> send it. Restoring from a backup happens entirely on your phone: you open the file in Valen, enter your passphrase, and your data is decrypted back onto the device.</p>
+
+  <p><strong>Some things are deliberately left out of the file.</strong> Anything Valen can work out again for itself is not included — your personal bests, for instance, are rebuilt from your workout history when you restore, rather than carried in the file. Nor is anything that belongs to one particular phone: a workout you had in progress, or internal housekeeping. And <strong>your sign-in details are never in a backup</strong>. Restoring a file onto a phone does not sign you in, and cannot.</p>
+
+  <div class="callout">
+    <p><strong>Your consent to use the coach does not travel in a backup either.</strong> Permission to send health information to the coach is asked for on each phone, and is not carried in the file. Restore your data onto a new device and Valen will ask you again before the coach will work.</p>
+    <p>That is deliberate. Consent to use health data should be something you give knowingly, on the device in your hand — not something a file grants quietly on your behalf.</p>
+  </div>
+
+  <h3>3.2 &nbsp; The safety copy kept when you restore</h3>
+
+  <p>Restoring a backup replaces everything currently on your phone. So that a mistake can be undone, Valen first takes a <strong>safety copy of the data already on the device</strong>, and offers you an <strong>Undo Last Restore</strong> button.</p>
+
+  <ul>
+    <li>The safety copy is held <strong>on your phone only</strong>. It is never sent to us or anyone else.</li>
+    <li>Unlike a backup file, it is <strong>not encrypted with a passphrase</strong>. It never leaves the device, and it exists only so the app can put your own data back where it was.</li>
+    <li>It is kept for <strong>up to 7 days</strong>, then deleted automatically.</li>
+    <li>It is also deleted the moment you use Undo Last Restore, and when you erase your local data or delete your account.</li>
+  </ul>
+
+  <h3>3.3 &nbsp; Sign-in diagnostics</h3>
+
+  <div class="callout">
+    <p><strong>This applies during the Valen beta only, and will be removed before general release</strong> — along with this section of the policy.</p>
+  </div>
+
+  <p>We are chasing a fault where a sign-in code occasionally fails to send. To find it, Valen keeps a short technical log of sign-in attempts <strong>on your phone</strong>. Each entry records the time, whether the attempt worked, what kind of error occurred if it did not, and a <strong>masked</strong> version of your email address — the first letter and the domain only, like <code>i***@example.com</code>.</p>
+
+  <ul>
+    <li>The log stays <strong>on your device</strong> and is <strong>never sent to us automatically</strong>. It reaches us only if you choose to copy it and send it while reporting a problem.</li>
+    <li>Only the <strong>20 most recent</strong> attempts are kept, and anything older than <strong>30 days</strong> is deleted automatically.</li>
+    <li>It is deleted when you delete your account, and when you erase your local data.</li>
+    <li>It is <strong>not</strong> cleared when you simply sign out — otherwise the very fault you might be reporting would be erased before we could see it.</li>
+  </ul>
 
   <h2 id="s4"><span class="num">04</span> What leaves your device</h2>
 
@@ -260,7 +296,9 @@
 
   <h3>4.4 &nbsp; Feedback</h3>
 
-  <p>If you send feedback through the app, what you type is delivered to us via <strong>Formspree</strong>, a form-handling service based in the United States. Please don't include anything sensitive in a feedback message. Whatever you write, we will read.</p>
+  <p>If you send feedback through the app, what you type goes to <strong>our own server in London</strong>, which forwards it to us by email. We do not store it there. No third-party form service is involved, and it does not leave the UK or the EU.</p>
+
+  <p>Please don't include anything sensitive in a feedback message. Whatever you write, we will read.</p>
 
   <p>Lawful basis: our legitimate interest in improving the app — Article 6(1)(f).</p>
 
@@ -282,21 +320,18 @@
 
   <p>Most of what we handle stays in the UK or the EU. Your account is in Ireland; our server is in London; sign-in emails go through France.</p>
 
-  <p><strong>Two things go to the United States:</strong></p>
+  <p><strong>One thing goes to the United States:</strong></p>
 
   <div class="table-scroll">
   <table>
     <thead><tr><th>Who</th><th>What</th><th>Why</th></tr></thead>
     <tbody>
       <tr><td>Anthropic</td><td>Your coach message and training summary (4.3)</td><td>To generate the coach's reply</td></tr>
-      <tr><td>Formspree</td><td>Whatever you type into Feedback (4.4)</td><td>To deliver it to us</td></tr>
     </tbody>
   </table>
   </div>
 
   <p>We contract with <strong>Anthropic Ireland Limited</strong>, but the data is stored in the United States. That transfer is made under the <strong>EU Standard Contractual Clauses, as supplemented by the UK International Data Transfer Addendum</strong> — legal safeguards designed to give your data protection comparable to that it has in the UK.</p>
-
-  <p>Transfers to <strong>Formspree</strong> are made under <span class="ph">[FORMSPREE TRANSFER MECHANISM — NOT YET VERIFIED]</span>.</p>
 
   <h2 id="s7"><span class="num">07</span> What we do not do</h2>
 
@@ -304,7 +339,7 @@
 
   <ul>
     <li><strong>No analytics.</strong> Valen contains no analytics SDK. We do not know how many workouts you log, which screens you visit, or how often you open the app.</li>
-    <li><strong>No crash reporting.</strong> We collect no crash or telemetry data.</li>
+    <li><strong>No crash reporting.</strong> We collect no crash or telemetry data. During the beta the app keeps a small sign-in log on your phone (section 3.3), but it stays there — it is never sent to us unless you choose to send it.</li>
     <li><strong>No advertising.</strong> No ad networks, no ad identifiers, no ad tracking.</li>
     <li><strong>No third-party tracking of any kind.</strong> There are no tracking SDKs in the app.</li>
     <li><strong>No selling or sharing your data.</strong> We do not sell your personal data, and we do not share it for advertising or marketing. We never will.</li>
@@ -319,11 +354,14 @@
     <thead><tr><th>Data</th><th>How long</th></tr></thead>
     <tbody>
       <tr><td>Everything on your device (§3)</td><td>Until you delete it, reset the app, or uninstall. We hold no copy and cannot recover it</td></tr>
+      <tr><td>Backup files you export (§3.1)</td><td>For as long as you keep them. They are yours; we never receive one and cannot delete one for you</td></tr>
+      <tr><td>The safety copy taken before a restore (§3.2)</td><td>Up to 7 days on your phone, then deleted automatically — or sooner if you undo the restore, erase your data, or delete your account</td></tr>
+      <tr><td>Sign-in diagnostics (§3.3, beta only)</td><td>The last 20 attempts, and nothing older than 30 days. On your phone only. Deleted when you delete your account or erase your data</td></tr>
       <tr><td>Your account</td><td>Until you delete it. Then it is removed</td></tr>
       <tr><td>Monthly usage counts</td><td>Deleted with your account</td></tr>
       <tr><td>Coach messages</td><td>Not stored by us at all. Held by Anthropic for up to 30 days — see below</td></tr>
       <tr><td>The coach's notes about you</td><td>On your phone until you erase your data. Sent to Anthropic with each message, and held by them on the same 30-day basis</td></tr>
-      <tr><td>Feedback messages</td><td>Kept while we act on them, then deleted</td></tr>
+      <tr><td>Feedback messages</td><td>Emailed to us and kept while we act on them, then deleted. Not stored on our server</td></tr>
     </tbody>
   </table>
   </div>
@@ -342,6 +380,8 @@
 
   <p>This permanently deletes your account, your email address, and your usage counts from our systems. It cannot be undone. You will be signed out and Valen Coach will be locked.</p>
 
+  <p>It also clears the two things Valen keeps on your phone that are tied to having an account: the <strong>sign-in diagnostics log</strong> (section 3.3), and any <strong>safety copy</strong> left over from a restore (section 3.2).</p>
+
   <div class="callout">
     <p><strong>Your workouts stay on your device.</strong> Deleting your account does not touch your training history. If you no longer want the AI coach, you can delete your account and carry on using Valen exactly as before, with everything you have logged intact.</p>
   </div>
@@ -350,7 +390,9 @@
 
   <p>In the app: <strong>Profile → Settings → Erase All Data on This Device</strong>.</p>
 
-  <p>This wipes everything in section 3 — workouts, programmes, personal bests, profile, the lot. It is permanent, and we cannot recover it, because we never had it. Uninstalling the app has the same effect.</p>
+  <p>This wipes everything in section 3 — workouts, programmes, personal bests, profile, the lot. It also clears the safety copy from any restore (3.2) and the sign-in diagnostics log (3.3), so nothing Valen holds on the device is left behind. It is permanent, and we cannot recover it, because we never had it. Uninstalling the app has the same effect.</p>
+
+  <p>It does not touch any backup file you have already exported. Those are stored wherever you put them, and only you can delete them.</p>
 
   <h3>If you have already uninstalled Valen</h3>
 
@@ -409,7 +451,9 @@
 
   <h2 id="s11"><span class="num">11</span> Children</h2>
 
-  <p>Valen is not intended for anyone under <span class="ph">[18 — CONFIRM]</span>, and we do not knowingly collect personal data from children. If you believe a child has created an account, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete it.</p>
+  <p><strong>Valen is for adults. You must be 18 or over to use it.</strong> We do not knowingly collect personal data from anyone under 18. If you believe someone under 18 has created an account, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete it.</p>
+
+  <p>Two reasons, and neither is a formality. The coach gives strength-training advice, which is not something we are willing to put in front of a child. And the coach only works with your explicit consent to handle health information — a decision an adult should be making for themselves.</p>
 
   <h2 id="s12"><span class="num">12</span> Security</h2>
 
@@ -433,14 +477,14 @@
   <h2 id="s15"><span class="num">15</span> Contact</h2>
 
   <p><strong>Email:</strong> <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a><br>
-  <strong>Post:</strong> <span class="ph">[COMPANY NAME]</span>, <span class="ph">[REGISTERED OFFICE ADDRESS]</span></p>
+  <strong>Post:</strong> Oscar Codes Ltd, Suite A, 82 James Carter Road, Mildenhall, IP28 7DE</p>
 
 </main>
 
 <footer>
   <div class="wrap">
     <p><a href="/">getvalen.app</a> · <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a></p>
-    <p><span class="ph">[COMPANY NAME]</span> · Registered in England &amp; Wales · Company no. <span class="ph">[COMPANY NUMBER]</span></p>
+    <p>Oscar Codes Ltd · Registered in England &amp; Wales · Company no. 17346219</p>
   </div>
 </footer>
 
