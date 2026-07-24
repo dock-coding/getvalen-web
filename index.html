@@ -152,12 +152,9 @@
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line-soft);padding:48px 0 40px}
-  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-  .foot-brand{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:800;font-size:17px}
-  .foot-brand svg{width:26px;height:26px}
-  .foot-links{display:flex;gap:26px;font-size:14px;color:var(--text-mid);flex-wrap:wrap}
-  .foot-links a:hover{color:var(--text)}
-  .foot-legal{width:100%;font-size:13px;color:var(--muted);margin-top:12px}
+  .footer-links{font-size:14px;color:var(--text-mid)}
+  .footer-links a:hover{color:var(--text)}
+  .footer-legal{margin-top:.8rem;max-width:56ch;font-size:13px;line-height:1.6;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -351,11 +348,11 @@
 </section>
 
 <!-- ================= FOOTER ================= -->
+
 <footer>
   <div class="wrap">
-    <p><a href="/">getvalen.app</a> · <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a></p>
-    <p>Valen is a product of Oscar Codes Ltd · Registered in England &amp; Wales · Company no. 17346219</p>
-    <p>Registered office: Suite A, 82 James Carter Road, Mildenhall, Suffolk, IP28 7DE</p>
+    <p class="footer-links"><a href="/">getvalen.app</a> · <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a></p>
+    <p class="footer-legal">Valen is a product of Oscar Codes Ltd, registered in England &amp; Wales, company no. 17346219. Registered office: Suite A, 82 James Carter Road, Mildenhall, United Kingdom, IP28 7DE.</p>
   </div>
 </footer>
 
