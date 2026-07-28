@@ -20,7 +20,7 @@
   Placeholders are highlighted in yellow.
   <br><strong>Done:</strong> company name + registered office (§1); minimum age set to 18 (§11).
   <br><strong>Still blocked:</strong> ICO registration number (§1) — must register and pay the £52 data protection fee before the first real beta user; both dates (set at deploy).
-  <br><strong>⚠️ Formspree removed from this policy (§00, §4.4, §6, §8).</strong> The app and website must ACTUALLY stop using Formspree before this publishes — the feedback endpoint on valen-proxy must be built, switched to, and delivery-confirmed first. Do not publish ahead of the code.
+  <br><strong>✅ RESOLVED — Formspree removed from this policy (§00, §4.4, §6, §8).</strong> <s>The app and website must ACTUALLY stop using Formspree before this publishes — the feedback endpoint on valen-proxy must be built, switched to, and delivery-confirmed first.</s> Confirmed: <code>/v1/feedback</code> on valen-proxy is live, the app has been repointed off Formspree, and email delivery to support@getvalen.app is confirmed (inbox delivery + working Reply-To, verified 28 Jul 2026).
   <br><strong>Code mismatch to fix:</strong> §11 says 18+, but onboarding currently accepts a DOB implying under-18. Add a DOB gate before launch.
   <br><strong>Added this revision:</strong> §3.1 backup exclusions + consent-not-carried callout; new §3.2 restore safety copy (7 days); new §3.3 sign-in diagnostics (BETA ONLY); §7, §8, §9 updated to match. Bump the app-side <code>policyVersion</code> to match before this goes live.
   <br><strong>⚠️ Beta-only removal task:</strong> §3.3, the §7 caveat and the §8 row must be deleted when the auth-diagnostics mechanism is removed (tracked in code at <code>AUTH_DIAG_ENABLED</code>).
