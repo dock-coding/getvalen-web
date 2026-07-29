@@ -21,7 +21,8 @@
   <br><strong>Done:</strong> company name + registered office (§1); minimum age set to 18 (§11).
   <br><strong>Still blocked:</strong> ICO registration number (§1) — must register and pay the £52 data protection fee before the first real beta user; both dates (set at deploy).
   <br><strong>✅ RESOLVED — Formspree removed from this policy (§00, §4.4, §6, §8).</strong> <s>The app and website must ACTUALLY stop using Formspree before this publishes — the feedback endpoint on valen-proxy must be built, switched to, and delivery-confirmed first.</s> Confirmed: <code>/v1/feedback</code> on valen-proxy is live, the app has been repointed off Formspree, and email delivery to support@getvalen.app is confirmed (inbox delivery + working Reply-To, verified 28 Jul 2026).
-  <br><strong>Code mismatch to fix:</strong> §11 says 18+, but onboarding currently accepts a DOB implying under-18. Add a DOB gate before launch.
+  <br><strong>✅ RESOLVED — DOB age gate built &amp; device-verified.</strong> <s>§11 says 18+, but onboarding accepts a DOB implying under-18.</s> Whole-app 18+ gate now blocks under-18s at onboarding and on launch; §11 updated to match.
+  <br><strong>Decided — UK-only launch, no EU representative needed (Article 27 not engaged).</strong> Enforce by restricting store distribution to the UK.
   <br><strong>Added this revision:</strong> §3.1 backup exclusions + consent-not-carried callout; new §3.2 restore safety copy (7 days); new §3.3 sign-in diagnostics (BETA ONLY); §7, §8, §9 updated to match. Bump the app-side <code>policyVersion</code> to match before this goes live.
   <br><strong>⚠️ Beta-only removal task:</strong> §3.3, the §7 caveat and the §8 row must be deleted when the auth-diagnostics mechanism is removed (tracked in code at <code>AUTH_DIAG_ENABLED</code>).
   <br><strong>⚠️ Sequencing:</strong> this must be deployed BEFORE any build with <code>AUTH_DIAG_ENABLED = true</code> reaches a tester.
@@ -53,7 +54,6 @@
 
   <p>Two things do leave your phone: <strong>your email address</strong>, if you create an account — and <strong>your message to the AI coach, together with a summary of your training</strong>, when you ask it a question. Nothing else, ever.</p>
 
-  <!-- The signature element: the whole policy in one picture. -->
   <div class="boundary">
     <div class="boundary__side boundary__side--stays">
       <p class="boundary__head">Stays on your phone</p>
@@ -296,7 +296,7 @@
 
   <h3>4.4 &nbsp; Feedback</h3>
 
-  <p>If you send feedback through the app, what you type goes to <strong>our own server in London</strong>, which forwards it to us by email. We do not store it there. No third-party form service is involved, and it does not leave the UK or the EU.</p>
+  <p>If you send feedback through the app, what you type goes to <strong>our own server in London</strong>, which emails it to us via <strong>Brevo</strong> (France, EU) — the same provider that delivers our sign-in codes. We do not store your feedback on the server. No third-party form service is involved, and your feedback does not leave the UK or the EU. If you choose to add your email address so we can reply, it travels with your message and is used only to respond to you.</p>
 
   <p>Please don't include anything sensitive in a feedback message. Whatever you write, we will read.</p>
 
@@ -368,7 +368,7 @@
 
   <p>Our providers keep their own operational records — email delivery logs, API request logs — under their own retention schedules.</p>
 
-  <p><strong>Anthropic</strong> deletes what you send to the coach, and the reply, <strong>within 30 days</strong>. There is one exception: if their automated safety systems flag a request as breaching their usage policy, they may keep it for up to two years. We have no control over that and no visibility into it, so we would rather you knew.</p>
+  <p>Under <strong>Anthropic's current commercial terms</strong>, they delete what you send to the coach, and the reply, within 30 days of receiving it. One exception: if their automated safety systems flag a request as breaching their usage policy, they may keep it for up to two years. These are Anthropic's terms, not ours — we have no control over them or visibility into what gets flagged, and they can change, so we point you to <a href="https://privacy.claude.com/en/articles/7996866">Anthropic's own retention policy</a> as the definitive source. We would rather you knew.</p>
 
   <h2 id="s9"><span class="num">09</span> Deleting your account and your data</h2>
 
@@ -388,7 +388,7 @@
 
   <h3>Erase your local data</h3>
 
-  <p>In the app: <strong>Profile → Settings → Erase All Data on This Device</strong>.</p>
+  <p>In the app: <strong>Profile → Settings → Erase All Valen Data</strong>.</p>
 
   <p>This wipes everything in section 3 — workouts, programmes, personal bests, profile, the lot. It also clears the safety copy from any restore (3.2) and the sign-in diagnostics log (3.3), so nothing Valen holds on the device is left behind. It is permanent, and we cannot recover it, because we never had it. Uninstalling the app has the same effect.</p>
 
@@ -410,48 +410,10 @@
 
   <p>If you are unhappy with how we have handled your data, you can complain to the <a href="https://ico.org.uk">Information Commissioner's Office</a>, the UK's data protection regulator.</p>
 
-  <!--
-  ============================================================
-  ⚠️ EU REPRESENTATIVE — READ BEFORE YOU PUBLISH ON PLAY ⚠️
-
-  Article 27 EU GDPR. A UK company offering a health-data app to EU
-  users needs a named representative established in an EU member state.
-
-  THIS IS EASY TO TRIP OVER: Google Play distribution defaults to ALL
-  COUNTRIES. If you publish without restricting countries, you are
-  offering the app to EU residents from day one, and Article 27 bites
-  immediately.
-
-  Two options, decide before release:
-    (a) Restrict Play distribution to the UK only for the beta and the
-        first release. Costs nothing. Leave this block commented out.
-    (b) Appoint an EU representative (paid service, roughly £200-500/yr)
-        and uncomment this block.
-
-  Do NOT publish worldwide with this block commented out.
-  ============================================================
-  <h3>Our EU representative</h3>
-  <p>Under Article 27 of the EU GDPR, our representative in the European Union is
-  [EU REP NAME AND ADDRESS]. EU residents may contact our representative on any
-  matter relating to the processing of their personal data.</p>
-  -->
-
-  <!--
-  ============================================================
-  US RESIDENTS — ACTIVATE WHEN DISTRIBUTING TO THE US
-  ============================================================
-  <h3>If you live in the United States</h3>
-  <p>If you live in California or another US state with a comprehensive privacy law,
-  you have rights to know, delete, correct, and opt out of the sale or sharing of
-  personal information. We do not sell or share personal information as those terms
-  are defined under those laws, and we do not use it for cross-context behavioural
-  advertising. To exercise any right, email privacy@getvalen.app. We will not
-  discriminate against you for doing so.</p>
-  -->
 
   <h2 id="s11"><span class="num">11</span> Children</h2>
 
-  <p><strong>Valen is for adults. You must be 18 or over to use it.</strong> We do not knowingly collect personal data from anyone under 18. If you believe someone under 18 has created an account, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete it.</p>
+  <p><strong>Valen is for adults. You must be 18 or over to use it.</strong> We ask for your date of birth when you first set up the app and do not let anyone under 18 proceed. We do not knowingly collect personal data from anyone under 18. If you believe someone under 18 is using Valen, email <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a> and we will delete any data associated with them.</p>
 
   <p>Two reasons, and neither is a formality. The coach gives strength-training advice, which is not something we are willing to put in front of a child. And the coach only works with your explicit consent to handle health information — a decision an adult should be making for themselves.</p>
 
@@ -467,7 +429,6 @@
 
   <p>Valen does not currently take payments, and we hold no payment data.</p>
 
-  <!-- ⚠️ AMEND WHEN B2 / RevenueCat SHIPS ⚠️ -->
   <p>When paid subscriptions launch, payments will be handled by Google Play and by our subscription provider. We will never see or store your card details. This policy will be updated before that happens.</p>
 
   <h2 id="s14"><span class="num">14</span> Changes to this policy</h2>
