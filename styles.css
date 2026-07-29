@@ -21,7 +21,7 @@
   --dim:   #5D6273;
 
   --violet:      #7C6FFF;
-  --violet-tint: rgba(124,107,245,0.12);
+  --violet-tint: rgba(124,111,255,0.12);
   --cyan:        #4FC3F7;
   --amber:       #F5A742;
   --amber-tint:  rgba(245,167,66,0.10);
@@ -264,14 +264,14 @@ footer p { color: var(--dim); margin: 0 0 0.4rem; }
   content: "";
   position: absolute; top: -22rem; left: 50%;
   width: 46rem; height: 46rem; transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(124,107,245,0.16) 0%, transparent 62%);
+  background: radial-gradient(circle, rgba(124,111,255,0.16) 0%, transparent 62%);
   pointer-events: none;
 }
 .hero__inner { position: relative; max-width: 62rem; margin: 0 auto; padding: 0 1.5rem; }
 
 .hero__mark {
   width: 84px; height: auto; margin-bottom: 2rem;
-  filter: drop-shadow(0 0 26px rgba(124,107,245,0.35));
+  filter: drop-shadow(0 0 26px rgba(124,111,255,0.35));
 }
 .hero h1 { font-size: clamp(2.3rem, 6.5vw, 3.9rem); max-width: 17ch; }
 .hero__lede { font-size: 1.18rem; color: var(--muted); max-width: 47ch; margin: 0 0 2rem; }
@@ -280,7 +280,7 @@ footer p { color: var(--dim); margin: 0 0 0.4rem; }
   display: inline-block; font-family: var(--mono);
   font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase;
   color: var(--violet); background: var(--violet-tint);
-  border: 1px solid rgba(124,107,245,0.28);
+  border: 1px solid rgba(124,111,255,0.28);
   border-radius: 999px; padding: 0.35rem 0.8rem;
 }
 
