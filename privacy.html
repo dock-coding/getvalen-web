@@ -14,21 +14,7 @@
 </head>
 <body>
 
-<!-- ⚠️ DELETE THIS ENTIRE <div> BEFORE PUBLISHING ⚠️ -->
-<div class="draft-banner">
-  <strong>DRAFT — NOT PUBLISHED.</strong>
-  Placeholders are highlighted in yellow.
-  <br><strong>Done:</strong> company name + registered office (§1); minimum age set to 18 (§11).
-  <br><strong>Still blocked:</strong> ICO registration number (§1) — must register and pay the £52 data protection fee before the first real beta user; both dates (set at deploy).
-  <br><strong>✅ RESOLVED — Formspree removed from this policy (§00, §4.4, §6, §8).</strong> <s>The app and website must ACTUALLY stop using Formspree before this publishes — the feedback endpoint on valen-proxy must be built, switched to, and delivery-confirmed first.</s> Confirmed: <code>/v1/feedback</code> on valen-proxy is live, the app has been repointed off Formspree, and email delivery to support@getvalen.app is confirmed (inbox delivery + working Reply-To, verified 28 Jul 2026).
-  <br><strong>✅ RESOLVED — DOB age gate built &amp; device-verified.</strong> <s>§11 says 18+, but onboarding accepts a DOB implying under-18.</s> Whole-app 18+ gate now blocks under-18s at onboarding and on launch; §11 updated to match.
-  <br><strong>Decided — UK-only launch, no EU representative needed (Article 27 not engaged).</strong> Enforce by restricting store distribution to the UK.
-  <br><strong>Added this revision:</strong> §3.1 backup exclusions + consent-not-carried callout; new §3.2 restore safety copy (7 days); new §3.3 sign-in diagnostics (BETA ONLY); §7, §8, §9 updated to match. Bump the app-side <code>policyVersion</code> to match before this goes live.
-  <br><strong>⚠️ Beta-only removal task:</strong> §3.3, the §7 caveat and the §8 row must be deleted when the auth-diagnostics mechanism is removed (tracked in code at <code>AUTH_DIAG_ENABLED</code>).
-  <br><strong>⚠️ Sequencing:</strong> this must be deployed BEFORE any build with <code>AUTH_DIAG_ENABLED = true</code> reaches a tester.
-  <br>Fill them all, then delete this banner.
-</div>
-<!-- ⚠️ END OF BANNER ⚠️ -->
+
 
 <header class="masthead">
   <div class="masthead__inner">
@@ -44,7 +30,7 @@
 
   <h1>Privacy Policy</h1>
   <p class="dek">What Valen collects, where it goes, and what you can do about it.</p>
-  <p class="meta">Last updated <span class="ph">[DATE]</span> &nbsp;·&nbsp; Effective <span class="ph">[DATE]</span></p>
+  <p class="meta">Last updated 22 September 2026 &nbsp;·&nbsp; Effective 22 September 2026</p>
 
   <h2><span class="num">00</span> The short version</h2>
 
@@ -52,7 +38,7 @@
 
   <p>Your workouts, programmes, personal bests, body weight and profile are stored only on your device. We never upload them to a server, and we cannot see them.</p>
 
-  <p>Two things do leave your phone: <strong>your email address</strong>, if you create an account — and <strong>your message to the AI coach, together with a summary of your training</strong>, when you ask it a question. Nothing else, ever.</p>
+  <p>Several things leave your phone — but only when a feature needs them: <strong>your email address</strong> if you create an account, <strong>your message to the AI coach and a summary of your training</strong> if you ask it something, and a couple of smaller ones below. Nothing happens until you take one of those actions.</p>
 
   <div class="boundary">
     <div class="boundary__side boundary__side--stays">
@@ -130,7 +116,7 @@
 
   <p>Valen is provided by <strong>Oscar Codes Ltd</strong>, a company registered in England and Wales (company number 17346219), whose registered office is at Suite A, 82 James Carter Road, Mildenhall, United Kingdom, IP28 7DE.</p>
 
-  <p>For the purposes of UK data protection law, we are the <strong>data controller</strong> for the personal data described here. We are registered with the Information Commissioner's Office under registration number <span class="ph">[ICO NUMBER]</span>.</p>
+  <p>For the purposes of UK data protection law, we are the <strong>data controller</strong> for the personal data described here. We have applied for registration with the Information Commissioner's Office; our registration number will be added here once confirmed.</p>
 
   <p>Contact: <a href="mailto:privacy@getvalen.app">privacy@getvalen.app</a></p>
 
